@@ -29,23 +29,23 @@ Your external SMTP server must be using encryption (i.e., plaintext is not allow
   <DonateLink>https://ko-fi.com/devzwf</DonateLink>
   <Requires/>
   <Config Name="Data Directory" Target="/var/spool/postfix" Default="" Mode="rw" Description="Used to store Postfix's mail spool" Type="Path" Display="always" Required="true" Mask="false"/>
-  <Config Name="Postfix SMTP server" Target="25" Default="25" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">25</Config>
-  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
-  <Config Name="Public SMTP" Target="RELAY_HOST" Default="" Mode="" Description="Public SMTP server to use&#13;&#10;must be using encryption (i.e., plaintext is not allowed)" Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Relay Port" Target="RELAY_PORT" Default="" Mode="" Description="Public SMTP port to use" Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="SMTP username" Target="RELAY_USER" Default="" Mode="" Description="Address to login to $RELAY_HOST" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="SMTP password" Target="RELAY_PASS" Default="" Mode="" Description="Password to login to $RELAY_HOST&#13;&#10;If using Gmail 2FA, you will need to setup an app password" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="Local SMTP Server Port" Target="25" Default="25" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">25</Config>
+  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timeszone of docker image." Type="Variable" Display="always" Required="true" Mask="false">America/New_York</Config>
+  <Config Name="SMTP Server Name" Target="RELAY_HOST" Default="" Mode="" Description="Forward to this SMTP server. Server must use encryption, plaintext not allowed." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="SMTP Server Port" Target="RELAY_PORT" Default="587" Mode="" Description="Forward to this port on the SMTP server." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="SMTP Username" Target="RELAY_USER" Default="" Mode="" Description="Username for login to SMTP server." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="SMTP Password" Target="RELAY_PASS" Default="" Mode="" Description="Password for login to SMTP server. If using Gmail 2FA, you will need to setup an app password." Type="Variable" Display="always" Required="false" Mask="true"/>
   <Config Name="Enable Submissions" Target="RELAY_SUBMISSIONS" Default="false" Mode="" Description="When 'true', use SUBMISSIONS protocol (formerly called SMTPS) instead of using the STARTTLS command." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Test Email address" Target="TEST_EMAIL" Default="" Mode="" Description="Address to receive test email&#13;&#10;If not set, test email will not be sent" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Test Email Address" Target="TEST_EMAIL" Default="" Mode="" Description="If set, send a test email to this email address on docker startup." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Test Email Subject" Target="TEST_EMAIL_SUBJECT" Default="Postfix relay test" Mode="" Description="Sets the subject of the test email sent on docker startup. Useful when running multiple instances." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Domain from address" Target="MYORIGIN" Default="" Mode="" Description="Domain of the from address" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="From Address" Target="FROMADDRESS" Default="" Mode="" Description="Changes the email from address" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Networks" Target="MYNETWORKS" Default="0.0.0.0/0" Mode="" Description="Networks that Postfix will forward mail for" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="From Address Domain" Target="MYORIGIN" Default="" Mode="" Description="Domain of the 'From' address. Needed for things like AWS SES where the domain must be set." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="From Address" Target="FROMADDRESS" Default="" Mode="" Description="If set, changes the email 'From' address.  Some SMTP services require a specific 'From' address." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Networks" Target="MYNETWORKS" Default="0.0.0.0/0" Mode="" Description="Forward email for a comma-delimited list of trusted networks." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Message Size" Target="MSG_SIZE" Default="10240000" Mode="" Description="Maximum email size in bytes, including envelope information." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Disable logging" Target="LOG_DISABLE" Default="false" Mode="" Description="When 'true', docker logging is disabled. When 'false', docker logging is to stdout." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Changes>### 2025.06.01
 - add RELAY_SUBMISSIONS, TEST_EMAIL_SUBJECT, MSG_SIZE, and LOG_DISABLE variables
-- reorder variables
+- reorder variables, revise variable descriptions
 ### 2023.10.03
 - add FROMADDRESS variable
 ### 2022.12.12
