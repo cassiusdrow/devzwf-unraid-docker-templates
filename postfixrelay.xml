@@ -39,12 +39,13 @@ Your external SMTP server must be using encryption (i.e., plaintext is not allow
   <Config Name="Test Email address" Target="TEST_EMAIL" Default="" Mode="" Description="Address to receive test email&#13;&#10;If not set, test email will not be sent" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Test Email Subject" Target="TEST_EMAIL_SUBJECT" Default="Postfix relay test" Mode="" Description="Sets the subject of the test email sent on docker startup. Useful when running multiple instances." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Domain from address" Target="MYORIGIN" Default="" Mode="" Description="Domain of the from address" Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Networks" Target="MYNETWORKS" Default="0.0.0.0/0" Mode="" Description="Networks that Postfix will forward mail for" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="From Address" Target="FROMADDRESS" Default="" Mode="" Description="Changes the email from address" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Networks" Target="MYNETWORKS" Default="0.0.0.0/0" Mode="" Description="Networks that Postfix will forward mail for" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Message Size" Target="MSG_SIZE" Default="10240000" Mode="" Description="Maximum email size in bytes, including envelope information." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Disable logging" Target="LOG_DISABLE" Default="false" Mode="" Description="When 'true', docker logging is disabled. When 'false', docker logging is to stdout." Type="Variable" Display="always" Required="false" Mask="false"/>
   <Changes>### 2025.06.01
 - add RELAY_SUBMISSIONS, TEST_EMAIL_SUBJECT, MSG_SIZE, and LOG_DISABLE variables
+- reorder variables
 ### 2023.10.03
 - add FROMADDRESS variable
 ### 2022.12.12
